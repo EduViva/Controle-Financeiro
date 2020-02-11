@@ -7,6 +7,8 @@ date_default_timezone_set('America/Sao_Paulo');
 $atualDate = date('d/m/Y');
 $atualAno = date('Y');
 
+$sql = "SELECT * FROM `lancamentos` WHERE `mes`= 01 && `ano`= 2020";
+$return = $db->query($sql);
 
 ?>
 <html>
@@ -94,25 +96,26 @@ $atualAno = date('Y');
                     </ul>
                   </div>
                 </div>
-
+                
+                
                 <?php
                 
                   foreach ($return as $key => $value) {
                     echo "<div class='col-md-12 col-xs-12 table-item' id='table-item-1'>";
                     echo "<ul>";
-                    echo "<li class='col-md-2'></li>";
-                    echo "<li class='col-md-3'>Gastos Não Essenciais</li>";
-                    echo "<li class='col-md-3'>Eu comprei um sorvete de creme</li>";
-                    echo "<li class='col-md-2'>R$1000,50</li>";
+                    echo "<li class='col-md-2 col-xs-5'></li>";
+                    echo "<li class='col-md-3 col-xs-5'>Gastos Não Essenciais</li>";
+                    echo "<li class='col-xs-12' id='separator' style='height:13px'></li>";
+                    echo "<li class='col-md-3 col-xs-5'>Eu comprei um sorvete de creme</li>";
+                    echo "<li class='col-md-2 col-xs-5'>R$1000,50</li>";
                     echo "<li class='col-md-1'><a href='#' class='ls-ico-pencil'></a></li>";
                     echo "<li class='col-md-1'><a href='#' class='ls-ico-remove'></a></li>";
                     echo "</ul>";
-                    echo "<hr>";
+                    echo "<hr class='col-md-12 col-xs-12'>";
                     echo "</div>";
                   }
                 
-                ?>
-          
+                ?>      
                 
                 
             </div>

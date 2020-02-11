@@ -21,11 +21,12 @@ function getData(mes){
         if(req.readyState == 4 && req.status == 200) {
      
             var resposta = req.responseText.split(".#");
+            resposta.pop();
 
             var box = document.getElementById("box-table");
-
-            while (box.hasChildNodes()){
-                box.removeChild(box.firstChild);
+            
+            while (box.childElementCount > 2){
+                box.removeChild(box.lastChild);
             }
 
             for(var i = 0; i < resposta.length; i++){
@@ -51,14 +52,15 @@ function getData(mes){
                 cat.className = 'col-md-3 col-xs-5';
                 sep.className = 'col-xs-12';
                 desc.className = 'col-md-3 col-xs-5';
-                val.className = 'col-md-2 col-xs-5';
-                edit.className = 'col-md-1';
-                remove.className = 'col-md-1';
+                val.className = 'col-md-2 col-xs-4';
+                edit.className = 'col-md-1 col-xs-1';
+                remove.className = 'col-md-1 col-xs-1';
                 hr.className = 'col-md-12 col-xs-12';
                 editA.className = 'ls-ico-pencil';
                 removeA.className = 'ls-ico-remove';
 
                 sep.style.height = '13px';
+                div.style.marginLeft = '-10px';
                 
                 div.id = 'table-item-'+thisReq[0];
                 sep.id = 'separator';
@@ -66,7 +68,7 @@ function getData(mes){
                 date.appendChild(document.createTextNode(thisReq[1]+"/"+thisReq[2]+"/"+thisReq[3]));
                 cat.appendChild(document.createTextNode(thisReq[5]));
                 desc.appendChild(document.createTextNode(thisReq[4]));
-                val.appendChild(document.createTextNode(thisReq[6]));
+                val.appendChild(document.createTextNode("R$"+thisReq[6]));
 
                 edit.appendChild(editA);
                 remove.appendChild(removeA);

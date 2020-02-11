@@ -49,8 +49,6 @@ $return = $db->query($sql);
 
           
           <div class="col-md-6 col-sm-12 col-md-offset-1 ls-tabs-container" id="box-lanc">
-            
-
           
             <div class="col-12" id="box-title">Lançamentos
               <select id="ano">
@@ -95,27 +93,7 @@ $return = $db->query($sql);
                       <li class="col-md-2 col-xs-2 adicionar"><a href="javascript:salvar()" class="ls-ico-cancel-circle add"></a></li>
                     </ul>
                   </div>
-                </div>
-                
-                
-                <?php
-                
-                  foreach ($return as $key => $value) {
-                    echo "<div class='col-md-12 col-xs-12 table-item' id='table-item-1'>";
-                    echo "<ul>";
-                    echo "<li class='col-md-2 col-xs-5'></li>";
-                    echo "<li class='col-md-3 col-xs-5'>Gastos Não Essenciais</li>";
-                    echo "<li class='col-xs-12' id='separator' style='height:13px'></li>";
-                    echo "<li class='col-md-3 col-xs-5'>Eu comprei um sorvete de creme</li>";
-                    echo "<li class='col-md-2 col-xs-5'>R$1000,50</li>";
-                    echo "<li class='col-md-1'><a href='#' class='ls-ico-pencil'></a></li>";
-                    echo "<li class='col-md-1'><a href='#' class='ls-ico-remove'></a></li>";
-                    echo "</ul>";
-                    echo "<hr class='col-md-12 col-xs-12'>";
-                    echo "</div>";
-                  }
-                
-                ?>      
+                </div>      
                 
                 
             </div>
@@ -171,7 +149,7 @@ $return = $db->query($sql);
   </div>
 
     
-
+    <script>getData('01');</script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js" type="text/javascript"></script>
     <script>

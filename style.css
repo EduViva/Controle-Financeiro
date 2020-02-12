@@ -1,7 +1,7 @@
 @media all and (max-width: 768px) {
     #tabs{
-    overflow:auto;
-    height: 120px;
+        overflow: auto;
+        height: 120px;
     }
     .head{
         display: none;
@@ -35,7 +35,6 @@ main{
 
 #box-lanc{
     background-color: silver;
-    height: max-content;
     margin-top: 40px;
     border-bottom-left-radius: 3.5px;
     border-bottom-right-radius: 3.5px;
@@ -54,23 +53,19 @@ main{
 
 .box-int{
     height: max-content;
-    margin-top: 20px;
-}
-
-.box-int ul{
-    margin-bottom: 25px;
-}
-
-.box-int ul:nth-child(6){
-    margin-bottom: 10px;
 }
 
 #box-renda{
     text-align: center;
+    margin-top: 20px;
 }
 
-#lanc{
-    margin-top: 20px;
+#box-renda ul{
+    margin-bottom: 25px;
+}
+
+#box-renda ul:nth-child(6){
+    margin-bottom: 100px;
 }
 
 .add{
@@ -121,6 +116,20 @@ hr{
     margin: 20px;
 }
 
+.head{
+    margin-top: 20px;
+}
+
 .lanc{
     margin-bottom: 25px;
+}
+
+#box-table{
+    height: fit-content;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+#div0{
+    text-align: center;
 }

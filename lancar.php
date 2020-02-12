@@ -94,10 +94,7 @@ $return = $db->query($sql);
                     </ul>
                   </div>
                 </div>      
-                
-                
             </div>
-          
           </div>
 
 

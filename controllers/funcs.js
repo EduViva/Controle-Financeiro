@@ -30,12 +30,12 @@ function getData(mes){
 
             // caso a resposta seja verdadeira, ele append os dados
             if(resposta.length > 0){
-
     
                 for(var i = 0; i < resposta.length; i++){
     
                     let thisReq = resposta[i].split(",");
                     
+                    //preenche a box principal
                     let div = document.createElement("div");
                     let ul = document.createElement("ul");
                     let date = document.createElement("li");
@@ -88,7 +88,10 @@ function getData(mes){
                     div.appendChild(hr);
     
                     box.appendChild(div);
-    
+                    // Fim box principal
+
+                   calc(cat, val);
+
                 }
             
             } else {
@@ -116,7 +119,6 @@ function salvar(){
     let descricao = document.querySelector("[name='descricao']").value;
     let categoria = document.querySelector("[name='categoria']").value;
     let valor = document.querySelector("[name='valor']").value;
-
 
     let alert = document.querySelector("[id='alert']");
     
@@ -147,13 +149,34 @@ function salvar(){
 
         req.onreadystatechange = function() {
             
-
             // Verifica se o Ajax realizou todas as operações corretamente
             if(req.readyState == 4 && req.status == 200) {
-        
+                getData();
             }
         }
         req.send(null);
     }
+
+}
+
+function calc(cat, val){
+
+    switch (cat) {
+        case Renda:
+            s_renda += val;
+            break;
+    
+        default:
+            break;
+    }
+
+    //preenche a box lateral
+    let renda = document.getElementById('renda');
+    let essenciais = document.getElementById('ge');
+    let n_essenciais = document.getElementById('gne');
+    let torrar = document.getElementById('torrar');
+    let caixa = document.getElementById('caixa');
+
+    renda.innerHTML = s_renda;
 
 }

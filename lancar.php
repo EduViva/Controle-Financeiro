@@ -80,6 +80,7 @@ $return = $db->query($sql);
                       <label for="categoria" class="col-xs-5 label">Categoria</label>
                       <li class="col-md-2 col-xs-5"><input name="data" style="width: 120%;" type="text" required value="<?php echo $atualDate; ?>" title="Use o formato dd/mm/aaaa"></li>
                       <li class="col-md-3 col-xs-5 "><select style="width: 120%" name="categoria" id="cat">
+                      <option value="Renda">Renda</option>
                       <option value="Gastos Essenciais">Gastos Essenciais</option>
                       <option value="Gastos Não Essenciais">Gastos Não Essenciais</option>
                       <option value="Torrar">Torrar</option>
@@ -104,32 +105,32 @@ $return = $db->query($sql);
             <div class="col-12 box-int" id="box-renda">
               <ul>
                 <li>Renda</li>
-                <li>R$</li>
+                <li id='renda'>R$</li>
               </ul>
               <ul>
                 <li>40%</li>
                 <li>Gastos Essenciais</li>
-                <li>R$</li>
+                <li id="ge">R$</li>
               </ul>
               <ul>
                 <li>10%</li>
                 <li>Gastos não essenciais</li>
-                <li>R$</li>
+                <li id="gne">R$</li>
               </ul>
               <ul>
                 <li>10%</li>
                 <li>Torrar</li>
-                <li>R$</li>
+                <li id="torrar">R$</li>
               </ul>
               <ul>
                 <li>30%</li>
                 <li>Investimento</li>
-                <li>R$</li>
+                <li id="inv">R$</li>
               </ul>
               <ul>
                 <li>10%</li>
                 <li>Caixa</li>
-                <li>R$</li>
+                <li id="caixa">R$</li>
               </ul>
             </div>
           </div>

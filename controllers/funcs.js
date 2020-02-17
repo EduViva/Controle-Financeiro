@@ -1,7 +1,7 @@
 function getData(mes){
 
     ano = document.getElementById("ano").value;
-    var box = document.getElementById("box-table");
+    let box = document.getElementById("box-table");
 
     // Verificando Browser
     if(window.XMLHttpRequest) {
@@ -30,67 +30,17 @@ function getData(mes){
 
             // caso a resposta seja verdadeira, ele append os dados
             if(resposta.length > 0){
-    
+                
                 for(var i = 0; i < resposta.length; i++){
     
                     let thisReq = resposta[i].split(",");
+                    console.log(thisReq);
                     
-                    //preenche a box principal
-                    let div = document.createElement("div");
-                    let ul = document.createElement("ul");
-                    let date = document.createElement("li");
-                    let cat = document.createElement("li");
-                    let sep = document.createElement("li");
-                    let desc = document.createElement("li");
-                    let val = document.createElement("li");
-                    let edit = document.createElement("li");
-                    let remove = document.createElement("li");
-                    let hr = document.createElement("hr");
-    
-                    let editA = document.createElement("a");
-                    let removeA = document.createElement("a");
-    
-                    div.className = 'col-md-12 col-xs-12 table-item';
-                    date.className = 'col-md-2 col-xs-5';
-                    cat.className = 'col-md-3 col-xs-5';
-                    sep.className = 'col-xs-12';
-                    desc.className = 'col-md-3 col-xs-5';
-                    val.className = 'col-md-2 col-xs-4';
-                    edit.className = 'col-md-1 col-xs-1';
-                    remove.className = 'col-md-1 col-xs-1';
-                    hr.className = 'col-md-12 col-xs-12';
-                    editA.className = 'ls-ico-pencil';
-                    removeA.className = 'ls-ico-remove';
-    
-                    sep.style.height = '13px';
-                    div.style.marginLeft = '-10px';
-                    
-                    div.id = 'table-item-'+thisReq[0];
-                    sep.id = 'separator';
-                    
-                    date.appendChild(document.createTextNode(thisReq[1]+"/"+thisReq[2]+"/"+thisReq[3]));
-                    cat.appendChild(document.createTextNode(thisReq[5]));
-                    desc.appendChild(document.createTextNode(thisReq[4]));
-                    val.appendChild(document.createTextNode("R$"+thisReq[6]));
-    
-                    edit.appendChild(editA);
-                    remove.appendChild(removeA);
-    
-                    ul.appendChild(date);
-                    ul.appendChild(cat);
-                    ul.appendChild(sep);
-                    ul.appendChild(desc);
-                    ul.appendChild(val);
-                    ul.appendChild(edit);
-                    ul.appendChild(remove);
-    
-                    div.appendChild(ul);
-                    div.appendChild(hr);
-    
-                    box.appendChild(div);
-                    // Fim box principal
+                    //id = thisReq[0];
 
-                   calc(cat, val);
+                    addBox(thisReq[1],thisReq[2],thisReq[3],thisReq[4],thisReq[5],thisReq[6]);
+
+                    show(thisReq[7],thisReq[8],thisReq[9],thisReq[10],thisReq[11],thisReq[12]);
 
                 }
             
@@ -113,7 +63,7 @@ function getData(mes){
     req.send(null);
 }
 
-function salvar(){
+function salvar(openMes){
 
     let data = document.querySelector("[name='data']").value;
     let descricao = document.querySelector("[name='descricao']").value;
@@ -151,12 +101,102 @@ function salvar(){
             
             // Verifica se o Ajax realizou todas as operações corretamente
             if(req.readyState == 4 && req.status == 200) {
-                getData();
+                if(data[1] == openMes){
+                    addBox(data[0],data[1],data[2],descricao,categoria,valor);
+                }
             }
         }
         req.send(null);
     }
 
+}
+
+function show(r, e, n, t, i, c){
+    console.log(r, e, n, t, i, c);
+    if(r){
+        document.getElementById("renda").innerHTML = r;
+    }
+    
+    if(e){
+        document.getElementById("ge").innerHTML = e;
+    }
+
+    if(n){
+        document.getElementById("gne").innerHTML = n;
+    }
+    
+    if(t){
+        document.getElementById("torrar").innerHTML = t;
+    }
+
+    if(i){
+        document.getElementById("inv").innerHTML = i;
+    }
+
+    if(c){
+        document.getElementById("caixa").innerHTML = c;
+    }
+
+}
+
+function addBox(diaI, mesI, anoI, descI, catI, valI){
+
+    let box = document.getElementById("box-table");
+
+    var div = document.createElement("div");
+    var ul = document.createElement("ul");
+    var date = document.createElement("li");
+    var cat = document.createElement("li");
+    var sep = document.createElement("li");
+    var desc = document.createElement("li");
+    var val = document.createElement("li");
+    var edit = document.createElement("li");
+    var remove = document.createElement("li");
+    var hr = document.createElement("hr");
+
+    var editA = document.createElement("a");
+    var removeA = document.createElement("a");
+    
+    //preenche a box principal
+    div.className = 'col-md-12 col-xs-12 table-item';
+    date.className = 'col-md-2 col-xs-5';
+    cat.className = 'col-md-3 col-xs-5';
+    sep.className = 'col-xs-12';
+    desc.className = 'col-md-3 col-xs-5';
+    val.className = 'col-md-2 col-xs-4';
+    edit.className = 'col-md-1 col-xs-1';
+    remove.className = 'col-md-1 col-xs-1';
+    hr.className = 'col-md-12 col-xs-12';
+    editA.className = 'ls-ico-pencil';
+    removeA.className = 'ls-ico-remove';
+
+    sep.style.height = '13px';
+    div.style.marginLeft = '-10px';
+    
+    div.id = 'table-item';
+    sep.id = 'separator';
+    
+    date.appendChild(document.createTextNode(diaI+"/"+mesI+"/"+anoI));
+    cat.appendChild(document.createTextNode(catI));
+    desc.appendChild(document.createTextNode(descI));
+    val.appendChild(document.createTextNode("R$"+valI));
+
+    edit.appendChild(editA);
+    remove.appendChild(removeA);
+
+    ul.appendChild(date);
+    ul.appendChild(cat);
+    ul.appendChild(sep);
+    ul.appendChild(desc);
+    ul.appendChild(val);
+    ul.appendChild(edit);
+    ul.appendChild(remove);
+
+    div.appendChild(ul);
+    div.appendChild(hr);
+
+    box.appendChild(div);
+    // Fim box principal
 }
 
 function calc(cat, val){

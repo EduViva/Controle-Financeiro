@@ -91,7 +91,7 @@ $return = $db->query($sql);
                       <label for="valor" class="col-xs-5 label">Valor</label>
                       <li class="col-md-3 col-xs-5"><input name="descricao" style="width: 120%;" type="text" required ></li>
                       <li class="col-md-2 col-xs-5 "><input name="valor" style="width: 120%;" type="text" required></li>
-                      <li class="col-md-2 col-xs-2 adicionar"><a href="javascript:salvar()" class="ls-ico-cancel-circle add"></a></li>
+                      <li class="col-md-2 col-xs-2 adicionar"><a href="#" class="ls-ico-cancel-circle add"></a></li>
                     </ul>
                   </div>
                 </div>      
@@ -105,32 +105,32 @@ $return = $db->query($sql);
             <div class="col-12 box-int" id="box-renda">
               <ul>
                 <li>Renda</li>
-                <li id='renda'>R$</li>
+                <li>R$<span id='renda'></span></li>
               </ul>
               <ul>
                 <li>40%</li>
                 <li>Gastos Essenciais</li>
-                <li id="ge">R$</li>
+                <li>R$<span id='ge'></span></li>
               </ul>
               <ul>
                 <li>10%</li>
                 <li>Gastos não essenciais</li>
-                <li id="gne">R$</li>
+                <li>R$<span id='gne'></span></li>
               </ul>
               <ul>
                 <li>10%</li>
                 <li>Torrar</li>
-                <li id="torrar">R$</li>
+                <li>R$<span id='torrar'></span></li>
               </ul>
               <ul>
                 <li>30%</li>
                 <li>Investimento</li>
-                <li id="inv">R$</li>
+                <li>R$<span id='inv'></span></li>
               </ul>
               <ul>
                 <li>10%</li>
                 <li>Caixa</li>
-                <li id="caixa">R$</li>
+                <li>R$<span id='caixa'></span></li>
               </ul>
             </div>
           </div>
@@ -155,6 +155,11 @@ $return = $db->query($sql);
     jQuery("#ano").change(function(){
       var mes = $("input[name='btn']:checked").val();
       getData(mes);
+    });
+
+    jQuery('.add').click(function(){
+      var mes = $("input[name='btn']:checked").val();
+      salvar(mes);
     });
 
 

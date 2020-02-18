@@ -1,7 +1,10 @@
+soma = 0;
+
 function getData(mes){
 
     ano = document.getElementById("ano").value;
-    let box = document.getElementById("box-table");
+    box = document.getElementById("box-table");
+
 
     // Verificando Browser
     if(window.XMLHttpRequest) {
@@ -81,6 +84,8 @@ function salvar(openMes){
         alert.style.display = "none";
 
         data = data.split("/");
+        valor = valor.replace(".","");
+        valor = valor.replace(",",".");
         
 
         console.log(data + "..." + descricao + "..." + categoria + "..." + valor);
@@ -103,45 +108,53 @@ function salvar(openMes){
             if(req.readyState == 4 && req.status == 200) {
                 if(data[1] == openMes){
                     addBox(data[0],data[1],data[2],descricao,categoria,valor);
+                    calc(categoria,valor);
                 }
             }
         }
         req.send(null);
+        document.querySelector("[name='data']").value = data[0]+"/"+data[1]+"/"+data[2];
+        document.querySelector("[name='descricao']").value = "";
+        document.querySelector("[name='valor']").value = "";
     }
 
 }
 
 function show(r, e, n, t, i, c){
-    console.log(r, e, n, t, i, c);
+
+    gEssenc = e;
+    gNEssenc = n;
+    gTor = t;
+    gInv = i;
+    gCx = c;
+
     if(r){
         document.getElementById("renda").innerHTML = r;
     }
     
     if(e){
-        document.getElementById("ge").innerHTML = e;
+        document.getElementById("ge").innerHTML = (e * 40/100);
     }
 
     if(n){
-        document.getElementById("gne").innerHTML = n;
+        document.getElementById("gne").innerHTML = (n * 10/100);
     }
     
     if(t){
-        document.getElementById("torrar").innerHTML = t;
+        document.getElementById("torrar").innerHTML = (t * 10/100);
     }
 
     if(i){
-        document.getElementById("inv").innerHTML = i;
+        document.getElementById("inv").innerHTML = (i * 30/100);
     }
 
     if(c){
-        document.getElementById("caixa").innerHTML = c;
+        document.getElementById("caixa").innerHTML = (c * 10/100);
     }
 
 }
 
 function addBox(diaI, mesI, anoI, descI, catI, valI){
-
-    let box = document.getElementById("box-table");
 
     var div = document.createElement("div");
     var ul = document.createElement("ul");
@@ -201,22 +214,31 @@ function addBox(diaI, mesI, anoI, descI, catI, valI){
 
 function calc(cat, val){
 
-    switch (cat) {
-        case Renda:
-            s_renda += val;
-            break;
-    
-        default:
-            break;
-    }
-
-    //preenche a box lateral
     let renda = document.getElementById('renda');
     let essenciais = document.getElementById('ge');
     let n_essenciais = document.getElementById('gne');
     let torrar = document.getElementById('torrar');
+    let inv = document.getElementById('inv');
     let caixa = document.getElementById('caixa');
 
-    renda.innerHTML = s_renda;
+    switch (cat) {
+        case 'Renda':
+            soma = soma + val;
+            var ge = (soma * 40/100) - gEssenc;
+            var gne = (soma * 10/100) - gNEssenc;
+            var tr = (soma * 10/100) - gTor;
+            var iv = (soma * 30/100) - gInv;
+            var cx = (soma * 10/100) - gCx;
+            var id = 'renda';
+            console.log("Esenciais:"+ge+" soma:"+soma+" val:"+val);
+        break;
+
+        case 'Gastos Essenciais':
+
+        break;
+    
+        default:
+            break;
+    }
 
 }

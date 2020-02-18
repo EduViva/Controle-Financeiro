@@ -9,8 +9,6 @@ $desc = $_GET["desc"];
 $cat = $_GET["cat"];
 $valor = $_GET["valor"];
 
-$number = str_replace(',','.',str_replace('.','',$valor));
-
 $sql = "INSERT INTO `lancamentos` (dia, mes, ano, descricao, categoria, valor) VALUES
 ('". $dia ."','" . $mes . "','" . $ano . "','" . $desc . "','" . $cat . "','" . $number . "')";
 

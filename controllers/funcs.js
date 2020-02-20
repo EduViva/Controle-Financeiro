@@ -133,23 +133,23 @@ function show(r, e, n, t, i, c){
     }
     
     if(e){
-        document.getElementById("ge").innerHTML = (e * 40/100);
+        document.getElementById("ge").innerHTML = (r * 40/100) - e;
     }
 
     if(n){
-        document.getElementById("gne").innerHTML = (n * 10/100);
+        document.getElementById("gne").innerHTML = (r * 10/100) - n;
     }
     
     if(t){
-        document.getElementById("torrar").innerHTML = (t * 10/100);
+        document.getElementById("torrar").innerHTML = (r * 10/100) - t;
     }
 
     if(i){
-        document.getElementById("inv").innerHTML = (i * 30/100);
+        document.getElementById("inv").innerHTML = (r * 30/100) - i;
     }
 
     if(c){
-        document.getElementById("caixa").innerHTML = (c * 10/100);
+        document.getElementById("caixa").innerHTML = (r * 10/100) - c;
     }
 
 }
@@ -212,29 +212,53 @@ function addBox(diaI, mesI, anoI, descI, catI, valI){
     // Fim box principal
 }
 
-function calc(cat, val){
+function calc(cat, valCalc){
 
-    let renda = document.getElementById('renda');
-    let essenciais = document.getElementById('ge');
-    let n_essenciais = document.getElementById('gne');
-    let torrar = document.getElementById('torrar');
-    let inv = document.getElementById('inv');
-    let caixa = document.getElementById('caixa');
+    let renda = document.getElementById('renda').innerHTML;
+    let essenciais = document.getElementById('ge').innerHTML;
+    let n_essenciais = document.getElementById('gne').innerHTML;
+    let torrar = document.getElementById('torrar').innerHTML;
+    let inv = document.getElementById('inv').innerHTML;
+    let caixa = document.getElementById('caixa').innerHTML;
+    
+    valCalc = +(parseFloat(valCalc).toFixed(2));
 
     switch (cat) {
         case 'Renda':
-            soma = soma + val;
+            soma = (soma + valCalc);
             var ge = (soma * 40/100) - gEssenc;
             var gne = (soma * 10/100) - gNEssenc;
             var tr = (soma * 10/100) - gTor;
             var iv = (soma * 30/100) - gInv;
             var cx = (soma * 10/100) - gCx;
-            var id = 'renda';
-            console.log("Esenciais:"+ge+" soma:"+soma+" val:"+val);
+            
+            renda = soma;
+            console.log("Soma:"+soma+" val:"+valCalc);
         break;
 
         case 'Gastos Essenciais':
+            var ge = (renda * 40/100) - gEssenc - valCalc; 
+            essenciais = ge;
+        break;
 
+        case 'Gastos Não Essenciais':
+            var gne = (renda * 10/100) - gNEssenc - valCalc; 
+            n_essenciais = gne;
+        break;
+
+        case 'Torrar':
+            var tr = (renda * 10/100) - gTor - valCalc; 
+            torrar = tr;
+        break;
+
+        case 'Investimento':
+            var iv = (renda * 30/100) - gInv - valCalc; 
+            inv = iv;
+        break;
+
+        case 'Caixa':
+            var cx = (renda * 10/100) - gCx - valCalc; 
+            caixa = cx;
         break;
     
         default:

@@ -10,7 +10,7 @@ $cat = $_GET["cat"];
 $valor = $_GET["valor"];
 
 $sql = "INSERT INTO `lancamentos` (dia, mes, ano, descricao, categoria, valor) VALUES
-('". $dia ."','" . $mes . "','" . $ano . "','" . $desc . "','" . $cat . "','" . $number . "')";
+('". $dia ."','" . $mes . "','" . $ano . "','" . $desc . "','" . $cat . "','" . $valor . "')";
 
 $db->query($sql);
 

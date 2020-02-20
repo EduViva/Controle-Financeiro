@@ -7,9 +7,6 @@ date_default_timezone_set('America/Sao_Paulo');
 $atualDate = date('d/m/Y');
 $atualAno = date('Y');
 
-$sql = "SELECT * FROM `lancamentos` WHERE `mes`= 01 && `ano`= 2020";
-$return = $db->query($sql);
-
 ?>
 <html>
   <head>

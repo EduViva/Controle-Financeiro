@@ -75,7 +75,7 @@ $atualAno = date('Y');
                     <ul>
                       <label for="data" class="col-xs-5 label">Data</label>
                       <label for="categoria" class="col-xs-5 label">Categoria</label>
-                      <li class="col-md-2 col-xs-5"><input name="data" style="width: 120%;" type="text" required value="<?php echo $atualDate; ?>" title="Use o formato dd/mm/aaaa"></li>
+                      <li class="col-md-2 col-xs-5"><input name="data" id="data" style="width: 120%;" type="text" required value="<?php echo $atualDate; ?>" title="Use o formato dd/mm/aaaa"></li>
                       <li class="col-md-3 col-xs-5 "><select style="width: 120%" name="categoria" id="cat">
                       <option value="Renda">Renda</option>
                       <option value="Gastos Essenciais">Gastos Essenciais</option>
@@ -87,7 +87,7 @@ $atualAno = date('Y');
                       <label for="descricao" class="col-xs-5 label">Descrição</label>
                       <label for="valor" class="col-xs-5 label">Valor</label>
                       <li class="col-md-3 col-xs-5"><input name="descricao" style="width: 120%;" type="text" required ></li>
-                      <li class="col-md-2 col-xs-5 "><input name="valor" style="width: 120%;" type="text" required></li>
+                      <li class="col-md-2 col-xs-5 "><input name="valor" id="valor" style="width: 120%;" type="text" required></li>
                       <li class="col-md-2 col-xs-2 adicionar"><a href="#" class="ls-ico-cancel-circle add"></a></li>
                     </ul>
                   </div>
@@ -140,12 +140,13 @@ $atualAno = date('Y');
 
     
   <div class="ls-alert-warning" id="alert" style="display: none">
-        <strong>Ops!</strong> Preencha os dados antes de salvar.
+        <strong>Ops!</strong> <span id="alert-text"></span>
   </div>
 
     
     <script>getData('01');</script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
     <script src="http://assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js" type="text/javascript"></script>
     <script>
     
@@ -159,7 +160,8 @@ $atualAno = date('Y');
       salvar(mes);
     });
 
-
+    $('#valor').mask('#.###.###,00', {reverse: true});
+    $('#data').mask('00/00/0000');
     </script>
 
   </body>

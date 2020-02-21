@@ -78,7 +78,8 @@ function salvar(openMes){
     if(!data || !descricao || !categoria || !valor){
        
         alert.style.display = "block";
-
+        document.getElementById('alert-text').innerHTML = "Preencha os dados antes de salvar!";
+    
     } else {
 
         alert.style.display = "none";
@@ -108,8 +109,21 @@ function salvar(openMes){
             if(req.readyState == 4 && req.status == 200) {
                 if(data[1] == openMes){
                     addBox(data[0],data[1],data[2],descricao,categoria,valor);
-                    calc(categoria,valor);
                 }
+                calc(categoria,valor,data[1],openMes);
+
+                let url = "models/movimentacao.php?mes=" +data[1]+ "&ano=" +data[2]+ "&cat=" +categoria+ "&valor=" +valor;
+        
+                req.open("Get", url, true);
+
+                req.onreadystatechange = function() {
+                    
+                    // Verifica se o Ajax realizou todas as operações corretamente
+                    if(req.readyState == 4 && req.status == 200) {
+
+                    }
+                }
+                req.send(null);
             }
         }
         req.send(null);
@@ -212,57 +226,63 @@ function addBox(diaI, mesI, anoI, descI, catI, valI){
     // Fim box principal
 }
 
-function calc(cat, valCalc){
+function calc(cat, valCalc, data, mes){
 
     let renda = document.getElementById('renda').innerHTML;
-    let essenciais = document.getElementById('ge').innerHTML;
-    let n_essenciais = document.getElementById('gne').innerHTML;
-    let torrar = document.getElementById('torrar').innerHTML;
-    let inv = document.getElementById('inv').innerHTML;
-    let caixa = document.getElementById('caixa').innerHTML;
+    let essenciais = document.getElementById('ge');
+    let n_essenciais = document.getElementById('gne');
+    let torrar = document.getElementById('torrar');
+    let inv = document.getElementById('inv');
+    let caixa = document.getElementById('caixa');
     
     valCalc = +(parseFloat(valCalc).toFixed(2));
 
     switch (cat) {
         case 'Renda':
-            soma = (soma + valCalc);
-            var ge = (soma * 40/100) - gEssenc;
-            var gne = (soma * 10/100) - gNEssenc;
-            var tr = (soma * 10/100) - gTor;
-            var iv = (soma * 30/100) - gInv;
-            var cx = (soma * 10/100) - gCx;
-            
-            renda = soma;
+            if(data == mes){
+                soma = (soma + valCalc);
+                var ge = (soma * 40/100) - gEssenc;
+                var gne = (soma * 10/100) - gNEssenc;
+                var tr = (soma * 10/100) - gTor;
+                var iv = (soma * 30/100) - gInv;
+                var cx = (soma * 10/100) - gCx;
+            }
             console.log("Soma:"+soma+" val:"+valCalc);
         break;
 
         case 'Gastos Essenciais':
             var ge = (renda * 40/100) - gEssenc - valCalc; 
-            essenciais = ge;
         break;
 
         case 'Gastos Não Essenciais':
             var gne = (renda * 10/100) - gNEssenc - valCalc; 
-            n_essenciais = gne;
         break;
 
         case 'Torrar':
             var tr = (renda * 10/100) - gTor - valCalc; 
-            torrar = tr;
         break;
 
         case 'Investimento':
             var iv = (renda * 30/100) - gInv - valCalc; 
-            inv = iv;
         break;
 
         case 'Caixa':
             var cx = (renda * 10/100) - gCx - valCalc; 
-            caixa = cx;
         break;
     
         default:
             break;
+    }
+
+    if(data == mes){
+        if(soma || ge || gne || tr || iv || cx){
+            document.getElementById('renda').innerHTML = soma;
+            essenciais.innerHTML = ge;
+            n_essenciais.innerHTML = gne;
+            torrar.innerHTML = tr;
+            inv.innerHTML = iv;
+            caixa.innerHTML = cx;
+        }
     }
 
 }

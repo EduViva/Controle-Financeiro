@@ -7,6 +7,12 @@ $ano = $_GET["ano"];
 $cat = $_GET["cat"];
 $valor = $_GET["valor"];
 
+if($cat == 'gastos essenciais'){
+    $cat = 'essenciais';
+} else if($cat == 'gastos não essenciais'){
+    $cat = 'nao_essenciais';
+}
+
 $busca = "SELECT * FROM `movimentacao` WHERE `mesMov`=". $mes ." && `anoMov`=". $ano;
 $retBusca = $db->query($busca);
 

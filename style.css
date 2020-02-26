@@ -12,6 +12,9 @@
     #separator{
         display: block;
     }
+    body{
+        height: fit-content;
+    }
 }
 
 @media all and (min-width: 769px) {
@@ -20,6 +23,9 @@
     }
     #separator{
         display: none;
+    }
+    body{
+        min-height: 110%;
     }
 }
 
@@ -62,10 +68,6 @@ main{
 
 #box-renda ul{
     margin-bottom: 25px;
-}
-
-#box-renda ul:nth-child(6){
-    margin-bottom: 100px;
 }
 
 .add{

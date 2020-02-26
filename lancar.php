@@ -81,7 +81,7 @@ $atualAno = date('Y');
                       <option value="Gastos Essenciais">Gastos Essenciais</option>
                       <option value="Gastos Não Essenciais">Gastos Não Essenciais</option>
                       <option value="Torrar">Torrar</option>
-                      <option value="Investimentos">Investimento</option>
+                      <option value="Investimento">Investimento</option>
                       <option value="Caixa">Caixa</option>
                       </select></li>
                       <label for="descricao" class="col-xs-5 label">Descrição</label>

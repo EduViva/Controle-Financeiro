@@ -24,9 +24,6 @@
     #separator{
         display: none;
     }
-    body{
-        min-height: 110%;
-    }
 }
 
 main{

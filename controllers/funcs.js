@@ -203,28 +203,25 @@ function addBox(diaI, mesI, anoI, descI, catI, valI){
     var sep = document.createElement("li");
     var desc = document.createElement("li");
     var val = document.createElement("li");
-    var edit = document.createElement("li");
     var remove = document.createElement("li");
     var hr = document.createElement("hr");
 
-    var editA = document.createElement("a");
     var removeA = document.createElement("a");
     
     //preenche a box principal
     div.className = 'col-md-12 col-xs-12 table-item';
-    date.className = 'col-md-2 col-xs-5';
-    cat.className = 'col-md-3 col-xs-5';
+    date.className = 'col-md-2 col-xs-5 date';
+    cat.className = 'col-md-3 col-xs-5 cat';
     sep.className = 'col-xs-12';
-    desc.className = 'col-md-3 col-xs-5';
-    val.className = 'col-md-2 col-xs-4';
-    edit.className = 'col-md-1 col-xs-1';
-    remove.className = 'col-md-1 col-xs-1';
+    desc.className = 'col-md-3 col-xs-5 desc';
+    val.className = 'col-md-2 col-xs-4 val';
+    remove.className = 'col-md-1 col-xs-1 remove';
     hr.className = 'col-md-12 col-xs-12';
-    editA.className = 'ls-ico-pencil';
     removeA.className = 'ls-ico-remove';
 
     sep.style.height = '13px';
     div.style.marginLeft = '-10px';
+    //desc.style.marginLeft = '12px';
     
     div.id = 'table-item';
     sep.id = 'separator';
@@ -234,7 +231,6 @@ function addBox(diaI, mesI, anoI, descI, catI, valI){
     desc.appendChild(document.createTextNode(descI));
     val.appendChild(document.createTextNode("R$"+valI));
 
-    edit.appendChild(editA);
     remove.appendChild(removeA);
 
     ul.appendChild(date);
@@ -242,7 +238,6 @@ function addBox(diaI, mesI, anoI, descI, catI, valI){
     ul.appendChild(sep);
     ul.appendChild(desc);
     ul.appendChild(val);
-    ul.appendChild(edit);
     ul.appendChild(remove);
 
     div.appendChild(ul);

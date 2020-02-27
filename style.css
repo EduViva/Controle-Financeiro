@@ -12,8 +12,14 @@
     #separator{
         display: block;
     }
-    body{
-        height: fit-content;
+    .lanc{
+        margin-top: 7px;
+    }
+    .remove{
+        margin-top: -15px;
+    }
+    .cat, .val{
+        margin-left: 15px;
     }
 }
 
@@ -24,10 +30,18 @@
     #separator{
         display: none;
     }
+    .desc{
+        margin-left: 12px;
+    }
+}
+
+html, body{
+    height: auto;
 }
 
 main{
     margin-top: 5px;
+    display: flow-root;
 }
 
 #tabs{
@@ -39,6 +53,7 @@ main{
 #box-lanc{
     background-color: silver;
     margin-top: 40px;
+    margin-bottom: 30px;
     border-bottom-left-radius: 3.5px;
     border-bottom-right-radius: 3.5px;
 }
@@ -112,7 +127,7 @@ main{
 }
 
 hr{
-    margin: 20px;
+    margin: 20px 0 20px;
 }
 
 .head{
@@ -132,3 +147,8 @@ hr{
 #div0{
     text-align: center;
 }
+
+.remove{
+    cursor: pointer;
+}
+

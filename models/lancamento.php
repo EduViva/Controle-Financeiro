@@ -14,6 +14,6 @@ $sql = "INSERT INTO `lancamentos` (dia, mes, ano, descricao, categoria, valor) V
 
 $db->query($sql);
 
-//number_format($valor,2,',','.');
+echo mysqli_insert_id($db);
 
 ?>

@@ -38,11 +38,8 @@ function getData(mes){
                 for(var i = 0; i < resposta.length; i++){
     
                     let thisReq = resposta[i].split(",");
-                    console.log(thisReq);
-                    
-                    //id = thisReq[0];
 
-                    addBox(thisReq[1],thisReq[2],thisReq[3],thisReq[4],thisReq[5],thisReq[6]);
+                    addBox(thisReq[0],thisReq[1],thisReq[2],thisReq[3],thisReq[4],thisReq[5],thisReq[6]);
 
                 }
             
@@ -147,6 +144,8 @@ function salvar(openMes){
             // Verifica se o Ajax realizou todas as operações corretamente
             if(req.readyState == 4 && req.status == 200) {
                 
+                savedId = req.responseText;
+
                 /////////////////////////
                 //Salvando movimentação//
                 /////////////////////////
@@ -160,9 +159,8 @@ function salvar(openMes){
                     // Verifica se o Ajax realizou todas as operações corretamente
                     if(req2.readyState == 4 && req2.status == 200) {
                         if(data[1] == openMes){
-                            addBox(data[0],data[1],data[2],descricao,categoria,valor);
+                            addBox(savedId,data[0],data[1],data[2],descricao,categoria,valor);
                             getMov(data[1], data[2]);
-                            console.log("cheguei aqui");
                         }
                     }
                 }
@@ -194,7 +192,7 @@ function show(r, e, n, t, i, c){
     
 }
 
-function addBox(diaI, mesI, anoI, descI, catI, valI){
+function addBox(idI, diaI, mesI, anoI, descI, catI, valI){
 
     var div = document.createElement("div");
     var ul = document.createElement("ul");
@@ -221,9 +219,8 @@ function addBox(diaI, mesI, anoI, descI, catI, valI){
 
     sep.style.height = '13px';
     div.style.marginLeft = '-10px';
-    //desc.style.marginLeft = '12px';
     
-    div.id = 'table-item';
+    div.id = 'table-item-'+idI;
     sep.id = 'separator';
     
     date.appendChild(document.createTextNode(diaI+"/"+mesI+"/"+anoI));
@@ -244,72 +241,8 @@ function addBox(diaI, mesI, anoI, descI, catI, valI){
     div.appendChild(hr);
 
     box.appendChild(div);
+    removeA.addEventListener('click', () => excluir(idI));
     // Fim box principal
-}
-
-function calc(cat, valCalc){
-
-    let renda = document.getElementById('renda').innerHTML;
-    let essenciais = document.getElementById('ge');
-    let n_essenciais = document.getElementById('gne');
-    let torrar = document.getElementById('torrar');
-    let inv = document.getElementById('inv');
-    let caixa = document.getElementById('caixa');
-    
-    valCalc = +(parseFloat(valCalc));
-    
-    switch (cat) {
-        case 'Renda':
-            soma = (soma + valCalc);
-            ge = (soma * 40/100) - gEssenc;
-            gne = (soma * 10/100) - gNEssenc;
-            tr = (soma * 10/100) - gTor;
-            iv = (soma * 30/100) - gInv;
-            cx = (soma * 10/100) - gCx;
-            console.log("Soma:"+soma+" val:"+valCalc);
-
-            document.getElementById('renda').innerHTML = soma;
-            essenciais.innerHTML = ge;
-            n_essenciais.innerHTML = gne;
-            torrar.innerHTML = tr;
-            inv.innerHTML = iv;
-            caixa.innerHTML = cx;
-        break;
-
-        case 'Gastos Essenciais':
-            gEssenc += valCalc; 
-            ge = (renda * 40/100) - gEssenc;
-            console.log("ge:"+ge+" gEssenc:"+gEssenc);
-            essenciais.innerHTML = ge;
-        break;
-
-        case 'Gastos Não Essenciais':
-            gNEssenc += valCalc;
-            gne = (renda * 10/100) - gNEssenc; 
-            n_essenciais.innerHTML = gne;
-        break;
-
-        case 'Torrar':
-            gTor += valCalc;
-            tr = (renda * 10/100) - gTor;
-            torrar.innerHTML = tr;
-        break;
-
-        case 'Investimento':
-            gInv += valCalc;
-            iv = (renda * 30/100) - gInv; 
-            inv.innerHTML = iv;
-        break;
-
-        case 'Caixa':
-            gCx += valCalc;
-            cx = (renda * 10/100) - gCx; 
-            caixa.innerHTML = cx;
-        break;
-    
-        default:
-            break;
-    }
 }
 
 function getMov(mes, ano){
@@ -331,10 +264,43 @@ function getMov(mes, ano){
         if(req.readyState == 4 && req.status == 200) {
             
             let thisReq = req.responseText.split(",");
-            console.log(thisReq[1],thisReq[2],thisReq[3],thisReq[4],thisReq[5],thisReq[6]);                  
+                
             show(thisReq[1],thisReq[2],thisReq[3],thisReq[4],thisReq[5],thisReq[6]);
             
         }
     }
     req.send(null);
+}
+
+function excluir(id){
+    console.log(id);
+
+    let ok = alert("Deseja excluir este lançamento?"); 
+
+    if(ok){
+        
+        //Excluindo do banco
+        if(window.XMLHttpRequest) {
+            req = new XMLHttpRequest();
+        } else if(window.ActiveXObject) {
+            req = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        
+        let url = "models/delete.php?id="+id;
+
+        req.open("Get", url, true);
+
+        req.onreadystatechange = function() {
+            // Verifica se o Ajax realizou todas as operações corretamente
+            if(req.readyState == 4 && req.status == 200) {
+                
+                let excluirDiv = document.getElementById(`table-item-${id}`);
+                excluirDiv.parentNode.removeChild(excluirDiv);
+
+            }
+        }
+        req.send(null);
+
+    }
+
 }

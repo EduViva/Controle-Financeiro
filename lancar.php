@@ -24,7 +24,7 @@ $atualAno = date('Y');
         <div class="row">
 
           <!--Escolha dos meses-->
-             
+             <p style="text-align:center; color: white; font-size: 50pt;">ADICIONAR HANDLE DE SUSCESSO BANCO ALERTS</p>
               <div class="ls-tabs-btn col-md-10 col-md-offset-1 visible-md-block" id="tabs">
                 <ul class="ls-tabs-btn-nav">
                   <li class="col-md-1 col-sm-4 col-xs-4 ls-active"><label class="ls-btn" data-ls-module="button" data-target="#jan" onclick="getData('01')">Jan <input type="radio" id='1' name="btn" value="01"></label></li>

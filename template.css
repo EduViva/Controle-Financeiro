@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500&display=swap');
 
 body {
-    background-color: #24252A;
+    background-color: #fffafa;
 }
 
 li, a, button{
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 16px;
-    color: #edf0f1;
+    color: rgb(118,118,118);
     text-decoration: none;
 }
 
@@ -17,7 +17,7 @@ header{
     justify-content: flex-end;
     align-items: center;
     padding: 20px 10%;
-    background-color: #24202A;
+    background-color: #fff;
 }
 
 .logo{
@@ -44,11 +44,10 @@ ul{
 
 button{
     padding: 9px 25px;
-    margin-left: 45px;
-    margin-right: -45px;
-    background-color: rgba(0, 136, 169, 1);
+    height: 100%;
+    background-color: rgb(138,5,190);
+    color: #fff;
     border: none;
-    border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }

@@ -273,13 +273,13 @@ function getMov(mes, ano){
 }
 
 function excluir(id){
-    console.log(id);
 
-    let ok = alert("Deseja excluir este lançamento?"); 
+    let ok = confirm("Deseja excluir este lançamento?"); 
 
     if(ok){
         
         //Excluindo do banco
+
         if(window.XMLHttpRequest) {
             req = new XMLHttpRequest();
         } else if(window.ActiveXObject) {
@@ -296,6 +296,39 @@ function excluir(id){
                 
                 let excluirDiv = document.getElementById(`table-item-${id}`);
                 excluirDiv.parentNode.removeChild(excluirDiv);
+            
+                let item = excluirDiv.innerHTML;
+
+                let exCat = item.split('cat">');
+                exCat = exCat[1].split("</li");
+                console.log('cat = '+exCat[0]);
+
+                let exData = item.split('date">');
+                exData = exData[1].split("</li");
+                exData = exData[0].split('/');
+                console.log(exData);
+                
+                let exVal = item.split('val">');
+                exVal = exVal[1].split("</li");
+                exVal = exVal[0].split('$');   
+                console.log(exVal[1]);
+
+                exVal = exVal[1] - (exVal[1]*2);
+                console.log('result: '+exVal);
+
+                let url2 = "models/movimentacao.php?mes=" +exData[1]+ "&ano=" +exData[2]+ "&cat=" +exCat[0].toLowerCase()+ "&valor=" +exVal;
+                console.log(url2);
+                
+                req2.open("Get", url2, true);
+
+                req2.onreadystatechange = function() {
+                    
+                    // Verifica se o Ajax realizou todas as operações corretamente
+                    if(req2.readyState == 4 && req2.status == 200) {
+                        getMov(exData[1], exData[2]);
+                    }
+                }
+                req2.send(null);
 
             }
         }
